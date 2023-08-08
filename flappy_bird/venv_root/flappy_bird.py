@@ -4,7 +4,7 @@ import random
 
 TELA_LARGURA = 500
 TELA_ALTURA = 800
-os.chdir(r'C:\caminhoCorreto\flappy_bird')
+os.chdir(r'C:\Users\Win10\OneDrive\Documentos\Estudos\python-libraries\pygame-library\flappy_bird')
 IMAGEM_CANO = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'pipe.png')))
 IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'base.png')))
 IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bg.png')))
@@ -36,7 +36,7 @@ class Passaro:
         self.imagem = self.IMGS[0]
 
     def pular(self):
-        self.velocidade = -7.5
+        self.velocidade = -10.5
         self.tempo = 0
         self.altura = self.y
 
