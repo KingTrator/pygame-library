@@ -37,31 +37,50 @@ class Sapo(pygame.sprite.Sprite): # Sapo herda dados deste último.
 
         self.atual = 0
         self.image = self.sprites[self.atual]
-        self.image = pygame.transform.scale(self.image, (128*3, 64*3))
         # Outra forma de aumentar as imagens em relação ao seu tamanho original.
 
         self.rect = self.image.get_rect()
         self.rect.topleft = 100, 100
+        self.atacando = True
+        self.contador_de_tempo = 0
+        self.image = pygame.transform.scale(self.image, (128*2, 64*2))
 
-        # Função que usa o métod "update()" herdado da classe parental.
-        def update(self):
-            self.atual += 1
-            if self.atual >= len(self.sprites):
-                self.atual = 0
-            self.image = self.sprites[self.atual]
+    def atacar(self):
+        self.atacando = True
+        self.contador_de_tempo = 0
+
+
+    def update(self):
+        if self.atacando:
+            self.contador_de_tempo += 1
+            if self.contador_de_tempo >= 3: 
+                self.atual += 1
+                if self.atual >= len(self.sprites):
+                    self.atual = 0
+                    self.atacando = False
+                self.image = self.sprites[self.atual]
+                self.image = pygame.transform.scale(self.image, (128*2, 64*2))
+                self.contador_de_tempo = 0 # Redefina o contador de tempo
+
 
 todas_as_sprites = pygame.sprite.Group() # Embora aqui haja apenas uma sprite
 # É uma boa prática inserir todas as sprites dentrou de um grupo
 SAPO = Sapo()
 todas_as_sprites.add(SAPO)
+clock = pygame.time.Clock()
+FPS = 60
 
 while True:
+    clock.tick(FPS)
     TELA.fill(BRANCO)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             exit()
-
+        if event.type == KEYDOWN:
+            if event.key == K_SPACE:
+                SAPO.atacar()
+    
     todas_as_sprites.draw(TELA)
     todas_as_sprites.update()
     pygame.display.flip()
