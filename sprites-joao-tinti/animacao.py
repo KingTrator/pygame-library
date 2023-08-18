@@ -60,11 +60,11 @@ class Sapo(pygame.sprite.Sprite): # Sapo herda dados deste último.
                     self.atacando = False
                 self.image = self.sprites[self.atual]
                 self.image = pygame.transform.scale(self.image, (128*2, 64*2))
-                self.contador_de_tempo = 0 # Redefina o contador de tempo
+                self.contador_de_tempo = 0 
 
 
 todas_as_sprites = pygame.sprite.Group() # Embora aqui haja apenas uma sprite
-# É uma boa prática inserir todas as sprites dentrou de um grupo
+# É uma boa prática inserir todas as sprites dentro de um grupo
 SAPO = Sapo()
 todas_as_sprites.add(SAPO)
 clock = pygame.time.Clock()
